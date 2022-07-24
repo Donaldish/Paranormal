@@ -1,2 +1,2 @@
 # Paranormal-UI-Library
-UI Library made for a script hub.
+UI Library made for Paranormal Hub

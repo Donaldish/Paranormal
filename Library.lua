@@ -1,13 +1,13 @@
 _G.SupportedGames = { 8278412720, 292439477, 286090429, 6055959032 }
 
-
--- Settings
-
 --- Configurable settings for the inside of the GUI library.
 local guiConfig = {
 	versionNumber = "1.0.0", -- The current version of the gui
-	changelogText = "-Created a UI Library\n\n-Made the game scripts\n\n-Severe depression", -- Changelog text: \n for new line, \" for double quotes, \[ for left squard bracket, and \] for right square bracket
-	keybind = Enum.KeyCode.Z, -- The open and close gui keybind. Default: Enum.KeyCode.Z
+
+	--- Changelog text: \n for new line, \" for double quotes, \[ for left squard bracket, and \] for right square bracket
+	changelogText = "-Created a UI Library\n\n-Made game scripts\n\n-Crying myself to sleep at night", 
+
+	keybind = Enum.KeyCode.RightControl, -- The open and close gui keybind. Default: Enum.KeyCode.RightControl
 };
 
 --- Variables inside of the GUI library itself. Do not change anything here.
@@ -22,11 +22,15 @@ local guiInternalConfig = {
 }
 
 
+--- Main Gui handler.
+local Library = {}
+
+
 -- Functions
 
 --- Allows a frame to be dragged.
 ---@param frame boolean The target frame.
-function dragify(frame)
+function Library:dragify(frame)
 	dragToggle = nil
 	local dragSpeed = 0
 	local dragInput = nil
@@ -66,47 +70,56 @@ end
 --- Checks if the game's place ID was found in a table.
 ---@param gameList table A list of PlaceIDs.
 ---@return boolean
-function isGameSupported(gameList) -- NOTICE: Only returns true for Gui testing!
+function Library:isGameSupported(gameList)
 	for k, v in ipairs(gameList) do
 		if v == game.PlaceId or (type(v) == "table") then
 			return true
 		end
 	end
-	return true --Should return false. Currently returns true for Gui testing.
+	return false
 end
-
-
---- Main Gui handler.
-local Library = {}
 
 --- Sends a notification using Roblox's StarterGui:Setcore.
 ---@param title string Name of the notification
 ---@param desc string Description of the notification
 ---@param time number How long the notification lasts
-function Library:Notify(title, desc, time)
+function Library:Notify(title, desc, imgid, time)
+	if imgid == nil then imgid = 274183391 end
 	game.StarterGui:SetCore("SendNotification", {
 		Title = title;
 		Text = desc;
-		Icon = ("rbxassetid://274183392");
+		Icon = ("rbxassetid://".. tostring(imgid));
 		Duration = time;
 	})
+end
+
+function Library:discordInvite(invcode)
+    if syn then 
+		self:Notify("Discord Invite", "Successfully prompted to join.", nil, 5)
+        syn.request({Url = "http://127.0.0.1:6463/rpc?v=1",Method = "POST",Headers = {["Content-Type"] = "application/json",["origin"] = "https://discord.com",},Body = game:GetService("HttpService"):JSONEncode({["args"] = {["code"] = invcode,},["cmd"] = "INVITE_BROWSER",["nonce"] = "a"})}) 
+    else 
+		self:Notify("Discord Invite", "Successfully copied to clipboard.", nil, 5)
+        setclipboard("https://discord.gg/".. invcode)
+    end
 end
 
 --- Sends a notification using Roblox's StarterGui:Setcore.
 ---@param title string Name of the notification
 ---@param desc string Description of the notification
+---@param imgid number The 
 ---@param time number How long the notification lasts
 ---@param option1 string Option one of the notification
 ---@param option2 string Option two of the notification
 ---@param callback function The function of the notification when an option is selected. 
 --- Option1 is true, Option2 is false.
-function Library:NotifyOptions(title, desc, time, option1, option2, callback)
+function Library:NotifyOptions(title, desc, imgid, time, option1, option2, callback)
+	if imgid == nil then imgid = 274183391 end
 	local bindf = Instance.new("BindableFunction")
 	bindf.OnInvoke = function(answer) if answer == option1 then callback(true) elseif answer == option2 then callback(false) end end
 	game.StarterGui:SetCore("SendNotification", {
 		Title = title;
 		Text = desc;
-		Icon = ("rbxassetid://274183392");
+		Icon = ("rbxassetid://".. tostring(imgid));
 		Duration = time;
 		Button1 = option1;
 		Button2 = option2;
@@ -119,6 +132,7 @@ function Library:CreateMain()
 	if game.CoreGui:FindFirstChild("ParanormalUI") then
 		game.CoreGui:FindFirstChild("ParanormalUI"):Destroy()
   	end
+	self:Notify("Paranormal Hub Loaded", string.format("Thanks for using our hub!\nUse RightCtrl to toggle the Gui's visibility.\nGo to the support tab for a list of games."), 8731967824, 5)
 	-- hhghg
 	local GUI = Instance.new("ScreenGui")
 	local Dragify = Instance.new("Frame")
@@ -173,7 +187,7 @@ function Library:CreateMain()
 	local UICorner_9 = Instance.new("UICorner")
 
 	--Properties:
-	GUI.Name = "GUI"
+	GUI.Name = "ParanormalUI"
 	GUI.Parent = game.CoreGui
 	GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Dragify.Name = "Dragify"
@@ -546,7 +560,7 @@ function Library:CreateMain()
 	--Scripting
 
 	--- Shows if the game is supported inside of the support page
-	if isGameSupported(_G.SupportedGames) then
+	if self:isGameSupported(_G.SupportedGames) then
 		Warning.Text = string.format("Support & Games List\nThis current game is supported!")
 	else
 		Warning.Text = string.format("Support & Games List\nThis game is not supported.")
@@ -599,7 +613,7 @@ function Library:CreateMain()
 	end
 
 	--- Dragifiys the actual gui.
-	dragify(Dragify)
+	self:dragify(Dragify)
 
 	--- Minimizes/unminimizes the Gui when you press the keybind.
 	game:GetService("UserInputService").InputBegan:Connect(function(key, gp)
@@ -680,11 +694,7 @@ function Library:CreateMain()
 	end)
 
 	TextButton_3.MouseButton1Click:Connect(function()
-		if syn then
-			print("bru")
-		else
-			setclipboard("bru")
-		end
+		self:discordInvite("mgMFZUYgQ9")
 	end)
 
 	--- Creates a new page inside of the UI.

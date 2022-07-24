@@ -1,3 +1,4 @@
+--- Example List
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Donaldish/Paranormal-Lib/main/Supported-Games.lua"))()
 
 --- Configurable settings for the inside of the GUI library.
@@ -560,14 +561,14 @@ function Library:CreateMain()
 	--Scripting
 
 	--- Shows if the game is supported inside of the support page
-	if self:isGameSupported(_G.SupportedGames) then
+	if self:isGameSupported(getgenv().SupportedGames) then
 		Warning.Text = string.format("Support & Games List\nThis current game is supported!")
 	else
 		Warning.Text = string.format("Support & Games List\nThis game is not supported.")
 	end
 
 	--- Creates the games list in the support page.
-	for _,v in pairs(_G.SupportedGames) do
+	for _,v in pairs(getgenv().SupportedGames) do
 		local Game = Instance.new("TextLabel")
 		local TextButton = Instance.new("TextButton")
 		local TextButton_2 = Instance.new("TextButton")

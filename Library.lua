@@ -1,4 +1,5 @@
-_G.SupportedGames = { 8278412720, 292439477, 286090429, 6055959032 }
+--- Example List
+_G.SupportedGames = { 286090429, 6055959032 }
 
 --- Configurable settings for the inside of the GUI library.
 local guiConfig = {
@@ -132,7 +133,7 @@ function Library:CreateMain()
 	if game.CoreGui:FindFirstChild("ParanormalUI") then
 		game.CoreGui:FindFirstChild("ParanormalUI"):Destroy()
   	end
-	self:Notify("Paranormal Hub Loaded", string.format("Thanks for using our hub!\n\nUse RightCtrl to toggle the Gui's visibility.\nGo to the support tab for a list of games."), 8731967824, 5)
+	self:Notify("Paranormal Hub", string.format("Loaded in successfully!\nUse RightCtrl to toggle."), nil, 5)
 	-- hhghg
 	local GUI = Instance.new("ScreenGui")
 	local Dragify = Instance.new("Frame")

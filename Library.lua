@@ -79,6 +79,41 @@ end
 --- Main Gui handler.
 local Library = {}
 
+--- Sends a notification using Roblox's StarterGui:Setcore.
+---@param title string Name of the notification
+---@param desc string Description of the notification
+---@param time number How long the notification lasts
+function Library:Notify(title, desc, time)
+	game.StarterGui:SetCore("SendNotification", {
+		Title = title;
+		Text = desc;
+		Icon = ("rbxassetid://274183392");
+		Duration = time;
+	})
+end
+
+--- Sends a notification using Roblox's StarterGui:Setcore.
+---@param title string Name of the notification
+---@param desc string Description of the notification
+---@param time number How long the notification lasts
+---@param option1 string Option one of the notification
+---@param option2 string Option two of the notification
+---@param callback function The function of the notification when an option is selected. 
+--- Option1 is true, Option2 is false.
+function Library:NotifyOptions(title, desc, time, option1, option2, callback)
+	local bindf = Instance.new("BindableFunction")
+	bindf.OnInvoke = function(answer) if answer == option1 then callback(true) elseif answer == option2 then callback(false) end end
+	game.StarterGui:SetCore("SendNotification", {
+		Title = title;
+		Text = desc;
+		Icon = ("rbxassetid://274183392");
+		Duration = time;
+		Button1 = option1;
+		Button2 = option2;
+		Callback = bindf
+	})
+end
+
 --- Creates the actual UI.
 function Library:CreateMain()
 	if game.CoreGui:FindFirstChild("ParanormalUI") then
@@ -623,44 +658,6 @@ function Library:CreateMain()
 	--- The handler for the pages inside of the UI.
 	local PageLibrary = {}
 
-	--- The handler for notifications inside of the UI.
-	local NotificationLibrary = {}
-
-	--- Sends a notification using Roblox's StarterGui:Setcore.
-	---@param title string Name of the notification
-	---@param desc string Description of the notification
-	---@param time number How long the notification lasts
-	function NotificationLibrary:Notify(title, desc, time)
-		game.StarterGui:SetCore("SendNotification", {
-			Title = title;
-			Text = desc;
-			Icon = ("rbxassetid://274183392");
-			Duration = time;
-		})
-	end
-
-	--- Sends a notification using Roblox's StarterGui:Setcore.
-	---@param title string Name of the notification
-	---@param desc string Description of the notification
-	---@param time number How long the notification lasts
-	---@param option1 string Option one of the notification
-	---@param option2 string Option two of the notification
-	---@param callback function The function of the notification when an option is selected. 
-	--- Option1 is true, Option2 is false.
-	function NotificationLibrary:NotifyOptions(title, desc, time, option1, option2, callback)
-		local bindf = Instance.new("BindableFunction")
-		bindf.OnInvoke = function(answer) if answer == option1 then callback(true) elseif answer == option2 then callback(false) end end
-		game.StarterGui:SetCore("SendNotification", {
-			Title = title;
-			Text = desc;
-			Icon = ("rbxassetid://274183392");
-			Duration = time;
-			Button1 = option1;
-    		Button2 = option2;
-			Callback = bindf
-		})
-	end
-
 	--- Selects a page based on the name
 	---@param pageName string The name of the page.
 	function PageLibrary:SelectPage(pageName)
@@ -969,6 +966,6 @@ function Library:CreateMain()
 		end
 		return ElementLibrary;
 	end
-	return PageLibrary, NotificationLibrary;
+	return PageLibrary;
 end
 return Library;

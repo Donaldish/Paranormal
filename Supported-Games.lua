@@ -1,1 +1,1 @@
-_G.SupportedGames = { 155615604, 8540346411 }
+getgenv().SupportedGames = { 155615604, 8540346411 };

@@ -648,7 +648,7 @@ function Library:CreateMain()
 			MinMax.Text = "-"
 			Bottom.Visible = true
 			Back.Visible = true
-			Back:TweenSize(UDim2.new(0, 600, 0, 278),Enum.EasingDirection.Out,Enum.EasingStyle.Sine,0.3,false)
+			Back:TweenSize(UDim2.new(0, 600, 0, 288),Enum.EasingDirection.Out,Enum.EasingStyle.Sine,0.3,false)
 			task.wait(0.4)
 			Main.Visible = true
 			guiInternalConfig.CanMinimize = true
@@ -711,7 +711,6 @@ function Library:CreateMain()
 		local UICorner_7 = Instance.new("UICorner")
 		newPage.Name = Name
 		newPage.Parent = Pages
-		newPage.Active = true
 		newPage.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 		newPage.BackgroundTransparency = 1.000
 		newPage.BorderSizePixel = 0
@@ -868,7 +867,7 @@ function Library:CreateMain()
 			ToggleLabel.Position = UDim2.new(0, 40, 0, 0)
 			ToggleLabel.Size = UDim2.new(0, 435, 0, 35)
 			ToggleLabel.Font = Enum.Font.Gotham
-			ToggleLabel.Text = "Toggle"
+			ToggleLabel.Text = name
 			ToggleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 			ToggleLabel.TextSize = 14.000
 			ToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -901,7 +900,7 @@ function Library:CreateMain()
 		---@param name string The name of the toggle.
 		---@param callback function What happens when you change the value.
 		function ElementLibrary:CreateSlider(name, minvalue, maxvalue, callback)
-			name = name or "Toggle"
+			name = name or "Slider"
 			callback = callback or function() end
 			minvalue = minvalue or 0
 			maxvalue = maxvalue or 100
@@ -926,7 +925,7 @@ function Library:CreateMain()
 			SliderLabel.Position = UDim2.new(0.0210526325, 0, 0.0571428575, 0)
 			SliderLabel.Size = UDim2.new(0, 80, 0, 15)
 			SliderLabel.Font = Enum.Font.Gotham
-			SliderLabel.Text = "Slider"
+			SliderLabel.Text = (name.. ": 0")
 			SliderLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 			SliderLabel.TextSize = 14.000
 			SliderLabel.TextStrokeTransparency = 1.000

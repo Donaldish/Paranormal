@@ -132,7 +132,7 @@ function Library:CreateMain()
 	if game.CoreGui:FindFirstChild("ParanormalUI") then
 		game.CoreGui:FindFirstChild("ParanormalUI"):Destroy()
   	end
-	self:Notify("Paranormal Hub Loaded", string.format("Thanks for using our hub!\nUse RightCtrl to toggle the Gui's visibility.\nGo to the support tab for a list of games."), 8731967824, 5)
+	self:Notify("Paranormal Hub Loaded", string.format("Thanks for using our hub!\n\nUse RightCtrl to toggle the Gui's visibility.\nGo to the support tab for a list of games."), 8731967824, 5)
 	-- hhghg
 	local GUI = Instance.new("ScreenGui")
 	local Dragify = Instance.new("Frame")
@@ -208,7 +208,7 @@ function Library:CreateMain()
 	Back.Parent = BaseUI
 	Back.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
 	Back.Position = UDim2.new(-0, 0, 0.625999987, 0)
-	Back.Size = UDim2.new(0, 600, 0, 278)
+	Back.Size = UDim2.new(0, 600, 0, 288)
 	UICorner_2.CornerRadius = UDim.new(0, 10)
 	UICorner_2.Parent = Back
 	Side.Name = "Side"
@@ -284,7 +284,7 @@ function Library:CreateMain()
 	Welcome.BackgroundTransparency = 1.000
 	Welcome.BorderSizePixel = 0
 	Welcome.Position = UDim2.new(0.166999996, 0, 0.996999979, 0)
-	Welcome.Size = UDim2.new(0, 500, 0, 265)
+	Welcome.Size = UDim2.new(0, 500, 0, 275)
 	Welcome.HorizontalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 	Welcome.ScrollBarThickness = 0
 	Welcome.ScrollingEnabled = false
@@ -380,7 +380,7 @@ function Library:CreateMain()
 	Support.BackgroundTransparency = 1.000
 	Support.BorderSizePixel = 0
 	Support.Position = UDim2.new(0.166999996, 0, 0.996999979, 0)
-	Support.Size = UDim2.new(0, 500, 0, 265)
+	Support.Size = UDim2.new(0, 500, 0, 275)
 	Support.Visible = false
 	Support.HorizontalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 	Support.ScrollBarThickness = 0
@@ -452,8 +452,8 @@ function Library:CreateMain()
 	Sidebar.BackgroundTransparency = 1.000
 	Sidebar.BorderSizePixel = 0
 	Sidebar.Position = UDim2.new(0, 0, 0.996999979, 0)
-	Sidebar.Size = UDim2.new(0, 95, 0, 265)
-	Sidebar.CanvasSize = UDim2.new(0, 0, 1, 0)
+	Sidebar.Size = UDim2.new(0, 95, 0, 275)
+	--Sidebar.CanvasSize = UDim2.new(0, 0, 1, 0)
 	Sidebar.ScrollBarThickness = 2
 	UIListLayout_5.Parent = Sidebar
 	UIListLayout_5.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -713,9 +713,10 @@ function Library:CreateMain()
 		newPage.Active = true
 		newPage.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 		newPage.BackgroundTransparency = 1.000
+		newPage.BorderSizePixel = 0
 		newPage.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		newPage.Position = UDim2.new(0.166999996, 0, 0.996999979, 0)
-		newPage.Size = UDim2.new(0, 500, 0, 265)
+		newPage.Size = UDim2.new(0, 500, 0, 275)
 		newPage.Visible = false
 		newPage.ScrollBarThickness = 5
 		UIListLayout_2.Parent = newPage
